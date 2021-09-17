@@ -10,7 +10,7 @@ const withPropMapping = mapping => NextComponent => {
 	const WithPropMapping = props => <NextComponent {...mapping(props)} />;
 
 	WithPropMapping.displayName = `withPropMapping(${getDisplayName(
-		NextComponent,
+		NextComponent
 	)})`;
 
 	hoistNonReactStatics(WithPropMapping, NextComponent);
@@ -25,11 +25,11 @@ Logger.workshop = true;
 
 const EnhancedLogger = compose(
 	withPropMapping(
-		props => ({ ...props, foo: true }), //
+		props => ({ ...props, foo: true }) //
 	),
 	withPropMapping(
-		({ data, ...rest }) => ({ ...rest, data, loading: !data }), //
-	),
+		({ data, ...rest }) => ({ ...rest, data, loading: !data }) //
+	)
 )(Logger);
 
 const Exercise = () => (

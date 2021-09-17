@@ -25,7 +25,7 @@ const Col = ({ sx, span, maxColumns: maxColumnsProp, ...rest }) => {
 				px: gutters,
 				width: mapResponsiveProperty(
 					columnSpan => `${(columnSpan / maxColumns) * 100}%`,
-					span,
+					span
 				),
 				...sx,
 			}}

@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 class Avatar extends Component {
 	static propTypes = {
 		children: PropTypes.node,
+
 		size: PropTypes.number,
 	};
 

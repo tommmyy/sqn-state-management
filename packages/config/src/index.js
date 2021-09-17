@@ -21,7 +21,7 @@ module.exports.env = envalid.cleanEnv(
 	{
 		SERVER_PORT: num(),
 	},
-	options,
+	options
 );
 
 module.exports.browser = envalid.cleanEnv(
@@ -29,5 +29,5 @@ module.exports.browser = envalid.cleanEnv(
 	{
 		GATSBY_API_URL_WS: url(),
 	},
-	options,
+	options
 );

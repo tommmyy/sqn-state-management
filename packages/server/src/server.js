@@ -24,7 +24,7 @@ const notifyClients = state => {
 			JSON.stringify({
 				numberOfClients: state.clients.length,
 				messages: state.messages,
-			}),
+			})
 		);
 	});
 };
@@ -75,5 +75,5 @@ server.on('upgrade', function upgrade(request, socket, head) {
 const PORT = env.SERVER_PORT || 8081;
 
 server.listen(PORT, () =>
-	console.log(`Example of server listening on port ${PORT}!`),
+	console.log(`Example of server listening on port ${PORT}!`)
 );

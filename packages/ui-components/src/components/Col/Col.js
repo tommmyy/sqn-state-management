@@ -17,7 +17,7 @@ const Col = ({ sx, span, maxColumns: maxColumnsProp, ...rest }) => {
 				px: gutters,
 				width: mapResponsiveProperty(
 					spanToWidth(isNil(maxColumnsProp) ? maxColumns : maxColumnsProp),
-					span,
+					span
 				),
 				...sx,
 			}}

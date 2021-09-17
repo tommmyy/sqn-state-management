@@ -7,7 +7,7 @@
  */
 module.exports = {
 	root: true,
-	extends: ['lundegaard'],
+	extends: ['lundegaard', 'prettier'],
 	rules: {
 		'no-console': 'warn',
 		'import/order': ['error', { 'newlines-between': 'always' }],

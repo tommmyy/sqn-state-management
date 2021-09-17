@@ -15,15 +15,15 @@ const run = async () => {
 	log(chalk.blue.bold('Creating `.env` file...'));
 	log(
 		chalk.yellow(
-			'This will set the environment properties that are necessary for running the project.',
-		),
+			'This will set the environment properties that are necessary for running the project.'
+		)
 	);
 
 	try {
 		await fs.copy(path.join(rootDir, '.env-sample'), configEnvPath);
 		await fs.copy(
 			path.join(rootDir, '.env-sample'),
-			path.join(rootDir, '.env'),
+			path.join(rootDir, '.env')
 		);
 
 		// FIXME: following is not working on win

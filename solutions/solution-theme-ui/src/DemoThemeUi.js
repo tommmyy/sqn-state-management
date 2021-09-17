@@ -19,7 +19,7 @@ const createTheme = base =>
 				},
 			},
 		},
-		base,
+		base
 	);
 
 console.log(tailwind);

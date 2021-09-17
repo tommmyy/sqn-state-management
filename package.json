@@ -9,13 +9,14 @@
 		"chalk": "^4.1.0",
 		"eslint": "^7.32.0",
 		"eslint-config-lundegaard": "^0.3.0",
+		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-import": "^2.23.4",
 		"eslint-plugin-jest": "^24.4.0",
 		"eslint-plugin-jest-formatting": "^3.0.0",
 		"eslint-plugin-react": "^7.24.0",
 		"eslint-plugin-react-hooks": "^4.2.0",
 		"fs-extra": "^9.0.1",
-		"husky": "^4.2.5",
+		"husky": "^7.0.2",
 		"lint-staged": "^10.2.9",
 		"prettier": "^2.3.2"
 	},
@@ -28,7 +29,8 @@
 		"server": "yarn workspace @workshop/server",
 		"lint": "eslint --ext .js ./",
 		"format": "prettier --ignore-path .gitignore --write '**/*.{js,ts,json}' && yarn lint --fix",
-		"format:check": "prettier --list-different --ignore-path .gitignore --write '**/*.{js,ts,json}' && yarn lint --fix"
+		"format:check": "prettier --list-different --ignore-path .gitignore --write '**/*.{js,ts,json}' && yarn lint --fix",
+		"prepare": "husky install"
 	},
 	"workspaces": [
 		"workshop",
@@ -42,5 +44,9 @@
 		"@theme-ui/match-media": "0.3.1",
 		"@theme-ui/presets": "0.3.0",
 		"@theme-ui/prism": "0.3.0"
+	},
+	"lint-staged": {
+		"*.js": "eslint --cache --fix",
+		"*.--fix": "prettier --write"
 	}
 }

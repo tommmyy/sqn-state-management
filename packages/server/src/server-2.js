@@ -18,7 +18,7 @@ const notifyClients = state => {
 		client.send(
 			JSON.stringify({
 				numberOfClients: state.clients.length,
-			}),
+			})
 		);
 	});
 };
@@ -38,5 +38,5 @@ websocketServer.on('connection', ws => {
 const PORT = env.SERVER_PORT || 8081;
 
 server.listen(PORT, () =>
-	console.log(`Example of server listening on port ${PORT}!`),
+	console.log(`Example of server listening on port ${PORT}!`)
 );
