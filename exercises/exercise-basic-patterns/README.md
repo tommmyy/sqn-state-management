@@ -1,18 +1,9 @@
-# Basic patterns
+# Codestyle
 
-## 1. Refactor component in `Exercise` to fit into our code style.
+##  Refactor component in `Exercise` based on YOUR experience and preference
 
-Narrow:
-- class to arrow function
+Hints - what to check:
+- class vs functional component
 - defaulting of properties
-- move propTypes
-
-
-## 2. Use forwardRef and set the `displayName`.
-
-## 3. Move Avatar to its own folder with `index.js` file.
-
-## 4. Is there a need for `children` prop? Try to remove it.
-
-## 5. Is prop `style` extensible? Try to fix it.
+- directory structure of your component
 

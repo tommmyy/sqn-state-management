@@ -1,3 +1,4 @@
+// 1. Avatar to own folder
 import React from 'react';
 
 import Avatar from './Avatar';
