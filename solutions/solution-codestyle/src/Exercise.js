@@ -1,4 +1,4 @@
-// directory structure of your component wint index.js
+// directory structure of your component with index.js
 // Move Avatar to its own folder with index.js file.
 // refactor to function - arrow
 // defaulting of properties

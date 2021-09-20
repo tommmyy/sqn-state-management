@@ -1,6 +1,6 @@
 # Codestyle
 
-##  Refactor component in `Exercise` based on YOUR experience and preference
+##  Refactor `src/Exercise.js` based on YOUR experience and preference
 
 Hints - what to check:
 - class vs functional component

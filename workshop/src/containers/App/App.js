@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
+import { Container } from '@workshop/ui-components';
 
 import { Layout } from '../../components';
 import * as types from '../../types';
@@ -11,7 +12,7 @@ import './App.css';
 
 const App = ({ pages }) => (
 	<Layout>
-		<div className="App">
+		<Container className="App">
 			<header className="App-header">
 				<img src={logo} className="App-logo" alt="logo" />
 				<p>Welcome to React Workshop</p>
@@ -28,7 +29,7 @@ const App = ({ pages }) => (
 						))}
 				</ul>
 			</header>
-		</div>
+		</Container>
 	</Layout>
 );
 
