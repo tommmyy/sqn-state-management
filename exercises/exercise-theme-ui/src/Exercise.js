@@ -1,11 +1,13 @@
 import React from 'react';
 import { Box, ThemeProvider } from 'theme-ui';
-import { base } from '@theme-ui/presets';
+import { system } from '@theme-ui/presets';
 import { mergeDeepRight } from 'ramda';
 
-const theme = mergeDeepRight(base, {
+const theme = mergeDeepRight(system, {
 	// TODO: your stuff
 });
+
+console.log(theme);
 
 const Exercise = () => (
 	<ThemeProvider theme={theme}>

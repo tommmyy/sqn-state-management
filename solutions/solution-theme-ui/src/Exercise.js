@@ -2,68 +2,87 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { mapResponsiveProperty } from '@workshop/utils';
-import { Box, Flex, ThemeProvider, useThemeUI } from 'theme-ui';
-import * as presets from '@theme-ui/presets';
+import {
+	Box,
+	Button,
+	Card,
+	Flex,
+	Heading,
+	Text,
+	ThemeProvider,
+} from 'theme-ui';
+import { system } from '@theme-ui/presets';
 import { mergeDeepLeft } from 'ramda';
 
-const createTheme = mergeDeepLeft({
-	grid: {
-		maxColumns: 12,
-		gutters: 2,
+const theme = mergeDeepLeft(
+	{
+		// sizes: [0, '10px', '100px', '200px', '300px', '400px'],
+		space: [0, '10px', '100px', '200px', '300px', '400px'],
+		shadows: {
+			weak: '0 0 8px rgba(0, 0, 0, 0.125)',
+		},
+		radii: {
+			primary: 8,
+		},
+		text: {
+			mono: {
+				fontFamily: 'monospace',
+				letterSpacing: '-1px',
+				backgroundColor: 'muted',
+				color: 'secondary',
+				px: [1, 2],
+			},
+			inline: {},
+		},
+		cards: {
+			primary: {
+				padding: 2,
+				borderRadius: 'primary',
+				boxShadow: 'weak',
+			},
+		},
 	},
-});
-
-const Col = ({ sx, span, maxColumns: maxColumnsProp, ...rest }) => {
-	const {
-		theme: { grid: { maxColumns: maxColumnsTheme, gutters = 2 } = {} } = {},
-	} = useThemeUI();
-	const maxColumns = maxColumnsProp == null ? maxColumnsTheme : maxColumnsProp;
-
-	return (
-		<Box
-			sx={{
-				px: gutters,
-				width: mapResponsiveProperty(
-					columnSpan => `${(columnSpan / maxColumns) * 100}%`,
-					span
-				),
-				...sx,
-			}}
-			{...rest}
-		/>
-	);
-};
-Col.propTypes = {
-	maxColumns: PropTypes.number,
-	span: PropTypes.any,
-	sx: PropTypes.object,
-};
-
-const Row = ({ sx, ...rest }) => {
-	const { theme: { grid: { gutters } = {} } = {} } = useThemeUI();
-
-	return <Flex sx={{ flexWrap: 'wrap', mx: -gutters, ...sx }} {...rest} />;
-};
-Row.propTypes = { sx: PropTypes.object };
-
-const Container = ({ sx, ...rest }) => (
-	<Box sx={{ mx: 'auto', width: '100%', ...sx }} {...rest} />
+	system
 );
 
-Container.propTypes = { sx: PropTypes.object };
+console.log(theme);
+
+const InlineText = ({ variant = 'inline', ...rest }) => (
+	<Text as="span" variant={variant} {...rest} />
+);
+
+const Mono = ({ variant = 'mono', ...rest }) => (
+	<InlineText variant={variant} {...rest} />
+);
+
+// NOTE: unnecessary optimization in this case
+const styles = {
+	root: { height: '100vh', alignItems: 'center', justifyContent: 'center' },
+	body: { alignItems: 'center' },
+	content: { p: [3, 4, 5] },
+};
 
 const ThemeUi = () => (
-	<ThemeProvider theme={createTheme(presets.system)}>
-		<Container p={2}>
-			<Row>
-				<Col span={[12, 12, 6]}>half</Col>
-				<Col span={6}>half</Col>
-			</Row>
-			<Row>
-				<Col span={6}>half</Col>
-				<Col span={6}>half</Col>
-			</Row>
-		</Container>
+	<ThemeProvider theme={theme}>
+		<Flex sx={styles.root}>
+			<Card>
+				<Flex sx={styles.body}>
+					<Box sx={styles.content}>
+						<Heading>Tomas Konrady</Heading>
+						<Text>
+							<InlineText>Phone number:</InlineText>
+							<Mono>777 777 777</Mono>
+						</Text>
+						<Button as="a" href="tel://420777777777">
+							Contact me
+						</Button>
+					</Box>
+					<Box>
+						<img src="https://via.placeholder.com/150" />
+					</Box>
+				</Flex>
+			</Card>
+		</Flex>
 	</ThemeProvider>
 );
 

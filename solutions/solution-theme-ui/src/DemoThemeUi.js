@@ -3,28 +3,37 @@ import { Box, Button, Flex, Heading, Text, ThemeProvider } from 'theme-ui';
 import { system, tailwind } from '@theme-ui/presets';
 import { mergeDeepLeft } from 'ramda';
 
-// components - Flex, Box, Text, Heading
-// sx
-// responsiveprops
-// ThemeProvider - use base or tailwind -> System
-// add theme factory
+// Box.sx
+// - padding vs px,py...,
+// - responsive value, color: primary
+// - sx vs props
+// ThemeProvider - use @theme-ui/presets: tailwind -> system
+// - space, fontSizes
+// other components - Flex, Box, Text, Heading
+// "as" property
+// extend theme
 // custom variants for Button, nav link
 
-const createTheme = base =>
-	mergeDeepLeft(
-		{
-			links: {
-				nav: {
-					color: 'secondary',
-				},
+const theme = mergeDeepLeft(
+	{
+		buttons: {
+			elevated: {
+				color: 'primary',
 			},
 		},
-		base
-	);
+		links: {
+			nav: {
+				color: 'secondary',
+			},
+		},
+	},
+	tailwind
+);
 
-console.log(tailwind);
+console.log(theme);
+
 const DemoThemeUi = () => (
-	<ThemeProvider theme={createTheme(tailwind)}>
+	<ThemeProvider theme={theme}>
 		<Flex
 			sx={{
 				p: [1, 2, 4],
