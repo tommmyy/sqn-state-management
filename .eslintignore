@@ -1,0 +1,6 @@
+public
+dist
+es
+libs/**/lib
+node_modules
+

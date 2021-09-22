@@ -7,12 +7,14 @@ import exercises from '../exercises';
 
 const Exercise = ({ pageContext: { slug } }) => {
 	const Exercise = exercises[slug];
-
+	const isSSR = typeof window === 'undefined';
 	return (
 		<Layout>
-			<Suspense fallback="Loading">
-				{Exercise ? <Exercise /> : 'Exercise not found...'}
-			</Suspense>
+			{!isSSR && (
+				<Suspense fallback="Loading">
+					{Exercise ? <Exercise /> : 'Exercise not found...'}
+				</Suspense>
+			)}
 		</Layout>
 	);
 };

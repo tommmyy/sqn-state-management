@@ -4,6 +4,7 @@
  * - we allow to use have unused variables as there is files which serves
  *   as starting point for the further solution.
  * - we allow missing prop-types
+ *  - we allow classes
  */
 module.exports = {
 	root: true,
@@ -33,6 +34,7 @@ module.exports = {
 			rules: {
 				'no-unused-vars': 'warn',
 				'react/prop-types': 'off',
+				'react/prefer-stateless-function': 'warn',
 			},
 		},
 	],

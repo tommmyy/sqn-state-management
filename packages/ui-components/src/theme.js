@@ -1,9 +1,16 @@
-import { system } from '@theme-ui/presets';
+import { tailwind } from '@theme-ui/presets';
 
 const gutters = [2, 3, 4];
 
 const theme = {
-	...system, //
+	...tailwind, //
+	// buttons: {
+	// 	...system.buttons,
+	// 	secondary: {
+	// 		color: 'background',
+	// 		bg: 'secondary',
+	// 	},
+	// },
 	grid: {
 		container: {
 			px: gutters,
@@ -12,5 +19,5 @@ const theme = {
 		maxColumns: 12,
 	},
 };
-
+console.log(theme);
 export default theme;

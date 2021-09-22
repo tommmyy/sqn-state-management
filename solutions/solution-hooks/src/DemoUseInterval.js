@@ -4,8 +4,9 @@ import { Box, Button, Text } from '@workshop/ui-components';
 // 1.
 // - this is not hook, it does not even use useEffect
 // - adds new interval every rerender
+//
 // const useInterval = (callback, interval) => {
-// 	if (interval) {
+// 	if (typeof interval === "number") {
 // 		setInterval(callback, interval);
 // 	}
 // };
@@ -13,7 +14,7 @@ import { Box, Button, Text } from '@workshop/ui-components';
 // 2.
 // const useInterval = (callback, interval) => {
 // 	useEffect(() => {
-// 		if (interval != null) {
+// 	if (typeof interval === "number") {
 // 			setInterval(callback, interval);
 // 		}
 // 	}, [callback, interval]);
@@ -33,7 +34,7 @@ import { Box, Button, Text } from '@workshop/ui-components';
 //
 // const useInterval = (callback, interval) => {
 // 	useEffect(() => {
-// 		if (interval != null) {
+//   	if (typeof interval === "number") {
 // 			const id = setInterval(callback, interval);
 
 // 			return () => clearInterval(id);
@@ -54,7 +55,7 @@ import { Box, Button, Text } from '@workshop/ui-components';
 // 	});
 
 // 	useEffect(() => {
-// 		if (interval != null) {
+//   	if (typeof interval === "number") {
 // 			const tick = () => {
 // 				cbRef.current();
 // 			};
@@ -78,7 +79,7 @@ const useInterval = (callback, interval) => {
 	const cbRef = useCommitedRef(callback);
 
 	useEffect(() => {
-		if (interval != null) {
+		if (typeof interval === 'number') {
 			const tick = () => {
 				cbRef.current();
 			};
@@ -86,7 +87,7 @@ const useInterval = (callback, interval) => {
 
 			return () => clearInterval(id);
 		}
-	}, [interval]);
+	}, [interval, cbRef]);
 };
 
 const CounterApp = ({ random }) => {
