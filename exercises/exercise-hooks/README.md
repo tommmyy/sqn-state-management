@@ -1,4 +1,3 @@
+# ExerciseUseInterval
 
-## `useCommitedRef`
-Refaktorujte pomocí __commited reference__ patternu.
-
+- Přidejte tlačítko, kterým zastavíte resp. znovu spustíte interval.

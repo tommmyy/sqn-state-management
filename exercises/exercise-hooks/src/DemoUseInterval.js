@@ -3,7 +3,7 @@
 // Introduce useCommitedRef
 
 import React, { useEffect, useState } from 'react';
-import { Box, Button, Text } from '@workshop/ui-components';
+import { Box, Button, Heading, Text } from '@workshop/ui-components';
 
 const useInterval = (callback, interval) => {
 	if (interval) {
@@ -25,9 +25,13 @@ const CounterApp = ({ random }) => {
 
 	return (
 		<Box>
-			<Text>{counter}</Text>
+			<Heading>Demo useInterval</Heading>
+			<Text>counter: {counter}</Text>
+			<Text>incomming random: {random}</Text>
 			<Text>
-				<Button onClick={handleClick}>Toggle interval</Button>
+				<Button onClick={handleClick}>
+					{interval ? 'Set interval' : 'Unset interval'}
+				</Button>
 			</Text>
 		</Box>
 	);
