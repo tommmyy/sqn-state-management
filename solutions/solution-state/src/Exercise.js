@@ -25,26 +25,25 @@ const request = filterParams => ({
 });
 
 const success = payload => ({ type: ActionTypes.SUCCESS, payload });
-
-// >
-const failure = ({ error }) => ({ type: ActionTypes.SUCCESS, error });
-
+const failure = ({ error }) => ({ type: ActionTypes.ERROR, error });
 const reset = () => ({ type: ActionTypes.RESET });
 
-const apiUrl = 'https://api.github.com/repos/facebook/react/commits';
+const GH_API_URL = 'https://api.github.com/repos/facebook/react/commits';
 
 const fetchCommits = dispatch => async filterParams => {
 	const { page, per_page } = filterParams;
 	dispatch(request(filterParams));
 
 	try {
-		const response = await fetch(`${apiUrl}?per_page=${per_page}&page=${page}`);
+		const response = await fetch(
+			`${GH_API_URL}?per_page=${per_page}&page=${page}`
+		);
+
 		const data = await response.json();
 
 		dispatch(success(data));
 		return data;
 	} catch (error) {
-		// >
 		dispatch(failure(error));
 	}
 };
@@ -89,11 +88,16 @@ const ghReducer = (state, action) => {
 };
 
 const GhContext = createContext();
+const GhDispatchContext = createContext();
 
 const GHProvider = props => {
 	const [state, dispatch] = useReducer(ghReducer, { data: null, status: null });
 
-	return <GhContext.Provider {...props} value={{ state, dispatch }} />;
+	return (
+		<GhDispatchContext.Provider {...props} value={dispatch}>
+			<GhContext.Provider {...props} value={state} />
+		</GhDispatchContext.Provider>
+	);
 };
 
 const useGHCommits = () => {
@@ -106,8 +110,18 @@ const useGHCommits = () => {
 	return api;
 };
 
+const useGHCommitsDispatch = () => {
+	const api = useContext(GhDispatchContext);
+
+	if (!api) {
+		throw new Error('useGHCommits must be used within a GHProvider');
+	}
+
+	return api;
+};
+
 const Display = () => {
-	const { state } = useGHCommits();
+	const state = useGHCommits();
 	return (
 		<Box as="ul" sx={{ listStyle: 'none' }} p={0}>
 			{!isNilOrEmpty(state.data) &&
@@ -126,10 +140,8 @@ const intialFormState = {
 	page: 0,
 };
 const TinyForm = () => {
-	const {
-		state: { status },
-		dispatch,
-	} = useGHCommits();
+	const { status } = useGHCommits();
+	const dispatch = useGHCommitsDispatch();
 
 	const [formState, setFormState] = useState(intialFormState);
 
@@ -140,7 +152,6 @@ const TinyForm = () => {
 
 		setFormState({ ...formState, [name]: value });
 	};
-
 	return (
 		<form
 			onSubmit={event => {

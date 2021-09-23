@@ -4,17 +4,23 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Button, Flex, Input, Label, Text } from 'theme-ui';
 
-const Demo = () => {
+const Child = ({ random }) => {
 	const [value, setValue] = useState(0);
 	const [enabled, setEnabled] = useState(true);
 
 	useEffect(() => {
-		setTimeout(() => console.log(enabled, value), 3000);
+		setTimeout(() => console.log({ random, enabled, value }), 3000);
+	});
+
+	// unnecessary render everytime the value changed
+	useEffect(() => {
+		document.title = `Random: ${random}`;
 	});
 
 	return (
 		<Box>
 			<Text>Current value: {value}</Text>
+			<Text>Random: {random}</Text>
 
 			<Button
 				type="button"
@@ -37,5 +43,17 @@ const Demo = () => {
 		</Box>
 	);
 };
+const Parent = () => {
+	const [random, setRandom] = useState(Math.random());
 
-export default Demo;
+	return (
+		<Box>
+			<Child random={random} />
+			<Button onClick={() => setRandom(Math.random())} sx={{ mt: 4 }}>
+				Roll
+			</Button>
+		</Box>
+	);
+};
+
+export default Parent;

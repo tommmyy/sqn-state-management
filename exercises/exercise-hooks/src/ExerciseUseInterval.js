@@ -10,7 +10,7 @@ const useCommitedRef = value => {
 	return commitedRef;
 };
 
-const useInterval = (callback, interval, enabled) => {
+const useInterval = (callback, interval) => {
 	const latestCallback = useCommitedRef(callback);
 
 	useEffect(() => {
@@ -23,13 +23,12 @@ const useInterval = (callback, interval, enabled) => {
 
 			return () => clearInterval(id);
 		}
-	}, [interval, enabled]);
+	}, [interval]);
 };
 
 const CounterApp = ({ random }) => {
 	const [counter, setCounter] = useState(0);
 	const [interval, setInterval] = useState(null);
-	const [enabled, setEnabled] = useState(true);
 
 	useInterval(() => {
 		console.log('counter', counter, random);

@@ -23,14 +23,16 @@ const request = filterParams => ({
 
 const success = payload => ({ type: ActionTypes.SUCCESS, payload });
 
-const apiUrl = 'https://api.github.com/repos/facebook/react/commits';
+const GH_API_URL = 'https://api.github.com/repos/facebook/react/commits';
 
 const fetchCommits = dispatch => async filterParams => {
 	const { page, per_page } = filterParams;
 	dispatch(request(filterParams));
 
 	try {
-		const response = await fetch(`${apiUrl}?per_page=${per_page}&page=${page}`);
+		const response = await fetch(
+			`${GH_API_URL}?per_page=${per_page}&page=${page}`
+		);
 		const data = await response.json();
 
 		dispatch(success(data));

@@ -68,7 +68,7 @@ exports.onPreBootstrap = ({ reporter }) => {
 
 	export default {
 	${pages
-		.map(({ page, slug }) => `\t'${slug}': lazy(() => import('${page}')),`)
+		.map(({ page, slug }) => `\t\t'${slug}': lazy(() => import('${page}')),`)
 		.join('\n')}
 	};`;
 
