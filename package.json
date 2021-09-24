@@ -17,6 +17,7 @@
 		"eslint-plugin-react-hooks": "^4.2.0",
 		"fs-extra": "^9.0.1",
 		"husky": "^7.0.2",
+		"json-server": "^0.16.3",
 		"jest": "^27.2.0",
 		"lint-staged": "^10.2.9",
 		"prettier": "^2.3.2"
@@ -28,6 +29,7 @@
 		"init:dev": "node tools/setupDev",
 		"workshop": "yarn workspace @workshop/workshop",
 		"server": "yarn workspace @workshop/server",
+		"rq-server": "json-server --watch db.json --port 4002",
 		"lint": "eslint --ext .js ./",
 		"test": "jest --passWithNoTests",
 		"format": "prettier --ignore-path .gitignore --write '**/*.{js,ts,json}' && yarn lint --fix",

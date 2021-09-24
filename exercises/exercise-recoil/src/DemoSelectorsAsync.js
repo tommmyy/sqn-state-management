@@ -1,8 +1,6 @@
-// přidáme přepočet kalorií
-// new atom - unitAtom
-// totalEnergyState
-
-import React from 'react';
+// Suspense
+// async get
+import React, { Suspense } from 'react';
 import { Box, Button, Flex, Input, Label, Select } from 'theme-ui';
 import { RecoilRoot, atom, selector, useRecoilState } from 'recoil';
 
@@ -12,11 +10,13 @@ const CAL_to_J = 4.184;
 const cookiesState = atom({ key: 'cookies', default: 0 });
 
 const unitState = atom({ key: 'unit', default: 'j' });
+const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 // TODO:
 const totalEnergyState = selector({
 	key: 'totalEnergyState',
-	get: ({ get }) => {
+	get: async ({ get }) => {
+		await wait(2000);
 		const cookies = get(cookiesState);
 		const unit = get(unitState);
 
@@ -93,7 +93,9 @@ const Demo = () => (
 		<Flex
 			sx={{ flexDirection: 'column', gap: 'size-100', alignItems: 'center' }}
 		>
-			<CookieController />
+			<Suspense fallback={<Box>...</Box>}>
+				<CookieController />
+			</Suspense>
 
 			<CookieJar />
 		</Flex>
