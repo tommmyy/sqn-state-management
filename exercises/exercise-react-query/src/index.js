@@ -1,2 +1,3 @@
-// export { default } from './Demo';
-export { default } from './DemoMutation';
+export { default } from './Demo';
+// export { default } from './DemoFinished';
+// export { default } from './DemoMutation';

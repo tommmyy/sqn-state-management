@@ -1,8 +1,10 @@
-# Další stavy
+# Vyhledávání pokemonů
 
 - Pokračujte v příkladu: `Exercise.js`.
-- V příkladu máme jeden sdílený kontext pro state i pro akce nad stavem. Rozdělte do dvou.
-- Přidejte stavy: ERROR a RESET
-- Pokud se vyskytne chyba - vypište.
-- Přidejte tlačítko "Reset", které vyčistí stav.
-- Upravte si UI formuláře a seznamu dle libosti.
+- Přidej input pro vyhledávání pokemona.
+- `queryKey` bude odrážet hledaný výraz
+- Zobrazte obrázek pokemona, pokud je nalezen – `data.sprites.front_default`
+
+## Hints
+- https://pokeapi.co/
+- UkázkaURL: https://pokeapi.co/api/v2/pokemon/ditto

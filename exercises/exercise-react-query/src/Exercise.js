@@ -1,23 +1,3 @@
-// QueryClientProvider
-// useQuery - arguments, state
-// DevTools
-// throw error
-// console.log to show refetching on error
-//
-// add isFetching - focus on window
-//
-// 3rd arg { refetchOnWindowFocus:false }
-// {staleTime:Infinity }
-// {cacheTime:5000 }
-//
-// Second <Pokemons /> -> API communication
-// Second 2x <Pokemons queryKey="a" /> with sabe queryKey -> API communication
-// Second <Pokemons queryKey="b" /> with different queryKey -> API communication
-// Exercise
-// - https://pokeapi.co/api/v2/pokemon/ditto
-// - searching for a pokemon
-// - show image – splites.front_default
-
 import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import axios from 'axios';
@@ -27,16 +7,21 @@ import { Box, Button, Flex, Text } from 'theme-ui';
 import { wait } from './helpers';
 
 const Pokemons = () => {
-	const { isLoading, isFetching, error, data } = useQuery('pokemon', () => {
-		console.debug('Trying to fetch');
-		// return Promise.resolve().then(() => {
-		//   throw new Error("No pokemon");
-		// });
+	const { isLoading, isFetching, error, data } = useQuery(
+		'pokemon',
+		async () => {
+			await wait();
+			console.debug('Trying to fetch');
 
-		return axios
-			.get('https://pokeapi.co/api/v2/pokemon/')
-			.then(response => response.data.results);
-	});
+			// return Promise.resolve().then(() => {
+			//   throw new Error("No pokemon");
+			// });
+
+			return axios
+				.get('https://pokeapi.co/api/v2/pokemon/')
+				.then(response => response.data.results);
+		}
+	);
 
 	if (isLoading) return 'Loading...';
 
@@ -44,6 +29,7 @@ const Pokemons = () => {
 
 	return (
 		<Box>
+			{isFetching && 'Fetching...'}
 			{data.map(({ name }) => (
 				<Text key={name}>{name}</Text>
 			))}
@@ -52,7 +38,7 @@ const Pokemons = () => {
 };
 
 const App = () => {
-	const [isOpen, setIsOpen] = useState(false);
+	const [isOpen, setIsOpen] = useState(true);
 
 	return (
 		<Box>

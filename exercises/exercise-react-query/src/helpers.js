@@ -3,6 +3,9 @@ import { Button, Flex, Input, Label } from 'theme-ui';
 
 export const getRandomId = () => Math.round(Math.random() * 100000);
 
+export const wait = (ms = 1000) =>
+	new Promise(resolve => setTimeout(resolve, ms));
+
 export const Center = ({ children }) => (
 	<Flex sx={{ alignItems: 'center', justifyContent: 'center' }}>
 		{children}
