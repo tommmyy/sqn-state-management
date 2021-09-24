@@ -37,9 +37,9 @@ const CookieController = () => {
 
 const CookieJar = () => {
 	const [cookies] = useRecoilState(cookiesState);
-	// const cookies = useRecoilValue(cookiesState);
 
 	console.log('jar');
+
 	return (
 		<Flex sx={{ flexWrap: 'wrap', lineHeight: 1 }}>
 			{Array(cookies)
