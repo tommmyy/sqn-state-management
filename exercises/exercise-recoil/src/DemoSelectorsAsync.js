@@ -24,11 +24,7 @@ const totalEnergyState = selector({
 	},
 	set: ({ get, set }, value) => {
 		const unit = get(unitState);
-		console.log({ unit, value });
 
-		console.log(
-			parseInt(value) / ENERGY_PER_COOKIE_CAL / (unit === 'j' ? CAL_to_J : 1)
-		);
 		set(
 			cookiesState,
 			parseInt(value) / ENERGY_PER_COOKIE_CAL / (unit === 'j' ? CAL_to_J : 1)

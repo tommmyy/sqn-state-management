@@ -40,12 +40,13 @@ const CookieController = () => {
 			<Input
 				id="totalEnergy"
 				type="number"
+				min="0"
 				value={totalEnergy}
-				onChange={setTotalEnergy}
+				onChange={event => setTotalEnergy(event.target.value)}
 			/>
 			<Label htmlFor="unit">Pick a unit:</Label>
 
-			<Select value={unit} onChange={setUnit}>
+			<Select value={unit} onChange={event => setUnit(event.target.value)}>
 				<option value="j">J</option>
 				<option value="cal">cal</option>
 			</Select>
