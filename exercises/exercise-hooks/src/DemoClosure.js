@@ -1,5 +1,6 @@
 // describe useEffect synchronization
-// deps: undefined, [], [enabled]
+// Remove unnecessary change of title by deps:
+// - steps: undefined, [], [enabled]
 
 import React, { useEffect, useState } from 'react';
 import { Box, Button, Flex, Input, Label, Text } from 'theme-ui';
@@ -49,6 +50,7 @@ const Parent = () => {
 	return (
 		<Box>
 			<Child random={random} />
+
 			<Button onClick={() => setRandom(Math.random())} sx={{ mt: 4 }}>
 				Roll
 			</Button>
