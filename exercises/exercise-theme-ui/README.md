@@ -11,7 +11,7 @@ Cílem je vytvořit vizitku podobnou:
 
 - Komponenta obaluje InlineText
 -  Nastylujte komponentu jako novou variantu `mono` textu v theme:
-	- font-family používalo monospace font (vyuřijte alisu v `theme.fonts`)
+	- font-family používalo monospace font (využijte alisu v `theme.fonts`)
 	- využijte barev v `theme.colors` k nastylování barvy fontu a pozadí
 	- nastavte horizontální padding
 
@@ -38,7 +38,7 @@ Použití:
 - Pro `boxShadow` a `borderRadius` na příslušná místa v theme.
 - Použijte v Card variantě.
 
-## Použijte Vytvořené komponenty
+## Použijte vytvořené komponenty
 
 Násludující je markup, který použijeme
 ```jsx

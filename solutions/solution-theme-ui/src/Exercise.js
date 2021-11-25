@@ -1,7 +1,5 @@
 // step 1 - Solution
 import React from 'react';
-import PropTypes from 'prop-types';
-import { mapResponsiveProperty } from '@workshop/utils';
 import {
 	Box,
 	Button,
@@ -16,8 +14,8 @@ import { mergeDeepLeft } from 'ramda';
 
 const theme = mergeDeepLeft(
 	{
-		// sizes: [0, '10px', '100px', '200px', '300px', '400px'],
-		space: [0, '10px', '100px', '200px', '300px', '400px'],
+		// margin, padding scale
+		space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
 		shadows: {
 			weak: '0 0 8px rgba(0, 0, 0, 0.125)',
 		},
@@ -45,21 +43,24 @@ const theme = mergeDeepLeft(
 	system
 );
 
-console.log(theme);
+// console.log(theme);
 
 const InlineText = ({ variant = 'inline', ...rest }) => (
 	<Text as="span" variant={variant} {...rest} />
 );
 
-const Mono = ({ variant = 'mono', ...rest }) => (
-	<InlineText variant={variant} {...rest} />
-);
+const Mono = ({
+	variant = 'mono',
+	// or
+	// variant = 'text.mono',
+	...rest
+}) => <InlineText variant={variant} {...rest} />;
 
 // NOTE: unnecessary optimization in this case
 const styles = {
 	root: { height: '100vh', alignItems: 'center', justifyContent: 'center' },
 	body: { alignItems: 'center' },
-	content: { p: [3, 4, 5] },
+	content: { p: [1, 2, 3] },
 };
 
 const ThemeUi = () => (
