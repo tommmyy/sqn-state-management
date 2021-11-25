@@ -3,12 +3,7 @@ import { Button as ThemeButton } from 'theme-ui';
 
 const useButton = (props, ref) => {
 	// do something with ref
-	useEffect(
-		() => (
-			console.log('hallllooo', ref.current), ref.current && ref.current.focus()
-		),
-		[]
-	);
+	useEffect(() => ref.current && ref.current.focus(), []);
 
 	return props;
 };

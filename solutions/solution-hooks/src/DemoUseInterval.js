@@ -11,7 +11,7 @@ import { Box, Button, Text } from '@workshop/ui-components';
 // 	}
 // };
 
-// 2.
+// 2. wrap by useEffect, add deps
 // const useInterval = (callback, interval) => {
 // 	useEffect(() => {
 // 	if (typeof interval === "number") {
@@ -19,18 +19,18 @@ import { Box, Button, Text } from '@workshop/ui-components';
 // 		}
 // 	}, [callback, interval]);
 // };
+//
+// still the same
 
 // 3.
 // remove [callback]
 // - adds new interval when interval changes
 // 	}, [interval]);
+//
+// calls only first callback
 
 // 4.
 // add clearInterval
-// - everything OK, except is NOT
-// - state (counter) and prop (random) is not in-sync
-// - BUT - if we run rerender of CounterApp much quicker, interval is never
-// run!
 //
 // const useInterval = (callback, interval) => {
 // 	useEffect(() => {
@@ -41,6 +41,10 @@ import { Box, Button, Text } from '@workshop/ui-components';
 // 		}
 // 	}, [interval, callback]);
 // };
+//
+// - state (counter) and prop (random) is not in-sync
+// - BUT - if we run rerender of CounterApp much quicker, interval is never
+// run!
 
 // 5.
 // Working example
