@@ -1,13 +1,25 @@
-// added isNavbarOpen selector
-// added getAllUsers selector
-// when is "isNavbarOpen" called? when the navbar renders?
-import React, { useState } from 'react';
+// Added memo(UserList)
+// UserList is not rendered when adding new user
+import React, { memo, useState } from 'react';
 import { combineReducers, createStore } from 'redux';
 import { Provider, useDispatch, useSelector } from 'react-redux';
 import { Box, Button, Divider, Heading, Input, Label, Text } from 'theme-ui';
+import { createSelector } from 'reselect';
 
 import ui, { closeNavbar, isNavbarOpen, openNavbar } from './ui';
-import users, { addUser, getAllUsers } from './users';
+import users, { addUser, getAllUsers, getFilteredUsers } from './users';
+
+const getFilteredUsersMemo = createSelector(
+	[getAllUsers, (_, keyword) => keyword],
+	(users, keyword) => (
+		console.log('computing users'),
+		keyword
+			? users.filter(user =>
+					(user || '').toLowerCase().includes((keyword || '').toLowerCase())
+			  )
+			: users
+	)
+);
 
 const rootReducer = combineReducers({
 	ui,
@@ -20,7 +32,7 @@ const NavBar = () => {
 	const isOpen = useSelector(isNavbarOpen);
 	const dispatch = useDispatch();
 
-	console.log('render NavBar');
+	console.log('render navbar');
 
 	return (
 		<Box sx={{ background: 'muted' }}>
@@ -42,17 +54,11 @@ const NavBar = () => {
 		</Box>
 	);
 };
-const Users = () => {
-	const [newUser, setNewUser] = useState('');
-	const users = useSelector(getAllUsers);
 
-	const dispatch = useDispatch();
-
-	console.log('render Users');
-
-	return (
-		<Box>
-			<Heading>Users</Heading>
+const UserList = memo(
+	({ users }) => (
+		console.log('render UserList'),
+		(
 			<Box as="ul">
 				{users &&
 					users.map(user => (
@@ -61,6 +67,34 @@ const Users = () => {
 						</Box>
 					))}
 			</Box>
+		)
+	)
+);
+UserList.displayName = 'UserList';
+
+const Users = () => {
+	const [newUser, setNewUser] = useState('');
+	const [filter, setFilter] = useState('');
+
+	const users = useSelector(state => getFilteredUsersMemo(state, filter));
+	// const users = useSelector(state => getFilteredUsers(state, filter));
+	const dispatch = useDispatch();
+
+	console.log('render Users');
+
+	return (
+		<Box>
+			<Heading sx={{ mb: 2 }}>Users</Heading>
+
+			<Input
+				value={filter}
+				placeholder="Filter..."
+				onChange={event => {
+					setFilter(event.target.value);
+				}}
+				sx={{ mb: 2 }}
+			/>
+			<UserList users={users} />
 
 			<Divider />
 

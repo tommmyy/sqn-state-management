@@ -1,6 +1,7 @@
 // create fork of the file
 // show ui, users
 // combineReducers
+//
 // connect with useDispatch, useSelector
 import React, { useState } from 'react';
 import { combineReducers, createStore } from 'redux';
@@ -43,6 +44,7 @@ const NavBar = () => {
 	);
 };
 const addUser = () => {};
+
 const Users = () => {
 	const [newUser, setNewUser] = useState('');
 	const users = ['Tom'];

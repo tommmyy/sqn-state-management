@@ -1,6 +1,6 @@
 // getFilteredUsers returns new array every time
-// when toggling navbar - the users are still rerendered
 // use reselect
+// computation of users is not launched when adding an user
 import React, { useState } from 'react';
 import { combineReducers, createStore } from 'redux';
 import { Provider, useDispatch, useSelector } from 'react-redux';
@@ -11,13 +11,20 @@ import ui, { closeNavbar, isNavbarOpen, openNavbar } from './ui';
 import users, { addUser, getAllUsers, getFilteredUsers } from './users';
 
 const getFilteredUsersMemo = createSelector(
-	[getAllUsers, (_, keyword) => keyword],
-	(users, keyword) =>
+	// List of input-selectors
+	[
+		getAllUsers, //
+		(_, keyword) => keyword,
+	],
+	// Selector that returns value to be memoized
+	(users, keyword) => (
+		console.log('computing users'),
 		keyword
 			? users.filter(user =>
 					(user || '').toLowerCase().includes((keyword || '').toLowerCase())
 			  )
 			: users
+	)
 );
 
 const rootReducer = combineReducers({
@@ -61,11 +68,11 @@ const Users = () => {
 	const users = useSelector(state => getFilteredUsers(state, filter));
 	const dispatch = useDispatch();
 
-	console.log('render user');
+	console.log('render Users');
 
 	return (
 		<Box>
-			<Heading>Users</Heading>
+			<Heading sx={{ mb: 2 }}>Users</Heading>
 
 			<Input
 				value={filter}
@@ -73,7 +80,9 @@ const Users = () => {
 				onChange={event => {
 					setFilter(event.target.value);
 				}}
+				sx={{ mb: 2 }}
 			/>
+
 			<Box as="ul">
 				{users &&
 					users.map(user => (
