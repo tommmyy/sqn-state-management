@@ -1,18 +1,27 @@
+// Overview:
 // QueryClientProvider
 // useQuery - arguments, state
 // DevTools
+//
 // throw error
 // console.log to show refetching on error
 //
 // add isFetching - focus on window
+// slowdown with wait heloper
 //
 // 3rd arg { refetchOnWindowFocus:false }
 // {staleTime:Infinity }
 // {cacheTime:5000 }
 //
-// Second <Pokemons /> -> API communication
-// Second 2x <Pokemons queryKey="a" /> with sabe queryKey -> API communication
+// Second <Pokemons /> -> Show thant RQ dedupes API communication
+// Than - Add diff queryKey to each instance
+// Second 2x <Pokemons queryKey="a" /> with same queryKey -> API communication
 // Second <Pokemons queryKey="b" /> with different queryKey -> API communication
+//
+// Add PokemonCount component with same useQuery
+// refactor to usePokemon
+//
+//
 // Exercise
 // - https://pokeapi.co/api/v2/pokemon/ditto
 // - searching for a pokemon

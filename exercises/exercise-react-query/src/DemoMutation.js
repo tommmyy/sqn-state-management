@@ -1,3 +1,7 @@
+// yarn start rq-server
+// Overview: useMutation
+// - after mutate must be reload
+// - use "invalidateQueries"
 import React from 'react';
 import axios from 'axios';
 import {
@@ -46,7 +50,7 @@ const App = () => {
 
 	const { mutate: addTodo } = useMutation(addTodoMutation, {
 		onSuccess: () => {
-			client.invalidateQueries('todos');
+			// client.invalidateQueries('todos');
 		},
 	});
 
