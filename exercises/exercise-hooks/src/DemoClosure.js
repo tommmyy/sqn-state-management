@@ -1,5 +1,6 @@
+// Quick demo:
 // describe useEffect synchronization
-// Remove unnecessary change of title by deps:
+// Remove unnecessary computation of title by deps:
 // - steps: undefined, [], [enabled]
 
 import React, { useEffect, useState } from 'react';
@@ -13,10 +14,9 @@ const Child = ({ random }) => {
 		setTimeout(() => console.log({ random, enabled, value }), 3000);
 	});
 
-	// unnecessary render everytime the value changed
 	useEffect(() => {
 		document.title = `Random: ${random}`;
-	});
+	}, [random]);
 
 	return (
 		<Box>
@@ -44,6 +44,7 @@ const Child = ({ random }) => {
 		</Box>
 	);
 };
+
 const Parent = () => {
 	const [random, setRandom] = useState(Math.random());
 

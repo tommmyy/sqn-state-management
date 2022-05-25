@@ -4,7 +4,7 @@
 
 import React from 'react';
 import { Box, Button, Flex, Input, Label, Select } from 'theme-ui';
-import { RecoilRoot, atom, useRecoilState } from 'recoil';
+import { RecoilRoot, atom, selector, useRecoilState } from 'recoil';
 
 const ENERGY_PER_COOKIE_CAL = 400;
 const CAL_to_J = 4.184;
@@ -14,7 +14,24 @@ const cookiesState = atom({ key: 'cookies', default: 0 });
 const unitState = atom({ key: 'unit', default: 'j' });
 
 // TODO:
-const totalEnergyState = atom({ key: 'totalEnergyState', default: 0 });
+const totalEnergyState = selector({
+	key: 'totalEnergyState',
+	get: ({ get }) => {
+		const cookies = get(cookiesState);
+		const unit = get(unitState);
+
+		return cookies * ENERGY_PER_COOKIE_CAL * (unit === 'cal' ? 1 : CAL_to_J);
+	},
+	set: ({ get, set }, value) => {
+		const unit = get(unitState);
+		// console.log(typeof value);
+
+		set(
+			cookiesState,
+			parseInt(value) / ENERGY_PER_COOKIE_CAL / (unit === 'cal' ? 1 : CAL_to_J)
+		);
+	},
+});
 
 const Cookie = ({ sx, ...rest }) => (
 	<Box
@@ -61,10 +78,10 @@ const CookieController = () => {
 const CookieJar = () => {
 	const [cookies] = useRecoilState(cookiesState);
 
-	console.log('jar');
+	console.log('jar', cookies);
 	return (
 		<Flex sx={{ flexWrap: 'wrap', lineHeight: 1 }}>
-			{Array(cookies)
+			{Array(Math.floor(cookies))
 				.fill()
 				.map((_, i) => (
 					<Cookie key={i} />

@@ -1,13 +1,22 @@
 // implement usePrevious
 // describe useRef useEffect
 
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Box, Button, Flex, Input, Label, Text } from 'theme-ui';
 
-const usePrevious = value => {};
+const usePrevious = value => {
+	const previousValue = useRef();
+
+	useEffect(() => {
+		previousValue.current = value;
+	}, [value]);
+
+	return previousValue.current;
+};
 
 const Demo = () => {
 	const [value, setValue] = useState('');
+
 	const prevValue = usePrevious(value);
 
 	return (

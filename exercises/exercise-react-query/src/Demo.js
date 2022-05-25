@@ -36,16 +36,24 @@ import { Box, Button, Flex, Text } from 'theme-ui';
 import { wait } from './helpers';
 
 const Pokemons = () => {
-	const { isLoading, isFetching, error, data } = useQuery('pokemon', () => {
-		console.debug('Trying to fetch');
-		// return Promise.resolve().then(() => {
-		//   throw new Error("No pokemon");
-		// });
+	const { isLoading, isFetching, error, data } = useQuery(
+		'pokemon',
+		async () => {
+			console.debug('Trying to fetch');
+			// return Promise.resolve().then(() => {
+			//   throw new Error("No pokemon");
+			// });
+			await wait(1000);
 
-		return axios
-			.get('https://pokeapi.co/api/v2/pokemon/')
-			.then(response => response.data.results);
-	});
+			return axios
+				.get('https://pokeapi.co/api/v2/pokemon/')
+				.then(response => response.data.results);
+		},
+		{
+			// staleTime: Infinity,
+			// cacheTime: 0,
+		}
+	);
 
 	if (isLoading) return 'Loading...';
 
@@ -53,6 +61,7 @@ const Pokemons = () => {
 
 	return (
 		<Box>
+			{isFetching && 'Fetching...'}
 			{data.map(({ name }) => (
 				<Text key={name}>{name}</Text>
 			))}

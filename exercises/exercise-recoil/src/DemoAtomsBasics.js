@@ -1,6 +1,11 @@
 import React from 'react';
 import { Box, Button, Flex } from 'theme-ui';
-import { RecoilRoot } from 'recoil';
+import { RecoilRoot, atom, useRecoilValue, useSetRecoilState } from 'recoil';
+
+const cookiesState = atom({
+	key: 'cookies',
+	default: 0,
+});
 
 const Cookie = ({ sx, ...rest }) => (
 	<Box
@@ -16,13 +21,14 @@ const Cookie = ({ sx, ...rest }) => (
 );
 
 const CookieController = () => {
-	const setCookies = () => {};
+	// const setCookies = () => {};
+	const setCookies = useSetRecoilState(cookiesState);
 
-	return <Button onClick={() => setCookies()}>Gimme Cookie!</Button>;
+	return <Button onClick={() => setCookies(x => x + 1)}>Gimme Cookie!</Button>;
 };
 
 const CookieJar = () => {
-	const cookies = 3;
+	const cookies = useRecoilValue(cookiesState);
 
 	return (
 		<Flex sx={{ flexWrap: 'wrap', lineHeight: 1 }}>
